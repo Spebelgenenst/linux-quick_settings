@@ -220,6 +220,7 @@ class main_window:
         self.sleep_time = 1
         while self.do_refresh:
             self.refresh()
+            sleep(self.sleep_time)
             self.sleep_time *= 1.5
 
     def refresh(self):
