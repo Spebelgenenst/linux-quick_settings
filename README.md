@@ -1,7 +1,7 @@
+# If you want the latest stuff, just use the quick_settings.py from above!
+
 # linux-quick_settings
 I imported like 6-7 libarys, lol
-
-# If you want the latest stuff, just use the quick_settings.py from above!
 
 # dependencies
 python 3, tkinter, reaquests, beautifulsoup
