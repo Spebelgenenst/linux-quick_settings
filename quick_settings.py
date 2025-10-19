@@ -9,7 +9,7 @@ from time import sleep
 
 #settings
 window_size = "500x350"
-always_on_top = True
+always_on_top = False
 before_quit_question = True
 help_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" #temp
 mint_version_url = "https://linuxmint.com/download.php"
