@@ -1,9 +1,10 @@
 import tkinter as tk #pip install tk
-import subprocess
 from tkinter import messagebox
+import subprocess
 import webbrowser
 import requests #pip install requests
 from bs4 import BeautifulSoup #pip install beautifulsoup4
+import threading
 
 #settings
 window_size = "500x350"
@@ -32,6 +33,7 @@ font = "Arial"
 text_window_title = "Cat Menu :3"
 text_wifi_connection = "Wifi connected to: "
 text_no_wifi_connection = "No wifi connection :c"
+text_refresh = "refresh"
 text_mouse_settings = "mouse/touchpad settings"
 text_update_manager = "update manager"
 text_quit_message = "Are you sure you want to quit? :c"
@@ -83,7 +85,7 @@ class main_window:
 
         #cat
         self.cat = tk.Label(self.window, text=cat, font=(font, cat_size), fg=secondary_color, bg=window_bg)
-        self.cat.pack(pady=10)
+        self.cat.pack(pady=10, side="bottom")
 
         #start
         self.window.protocol("WM_DELETE_WINDOW", self.before_quit)
@@ -154,7 +156,6 @@ class main_window:
 
         self.update_manager_display_text = text_update_manager
         self.update_manager_display_color = text_bg
-
 
     #run applications
     def run_wifi_settings(self):
