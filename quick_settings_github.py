@@ -71,15 +71,15 @@ class main_window:
         self.wifi_settings = tk.Button(self.window, text=self.wifi_settings_display_text, font=(font, text_size), command=self.run_wifi_settings, fg=text_fg, bg=self.wifi_settings_display_color)
         self.wifi_settings.pack(pady=10)
 
-        #2. button
-        self.mouse_settings = tk.Button(self.window, text=text_mouse_settings, font=(font, text_size), command=self.run_mouse_settings, fg=text_fg, bg=text_bg)
-        self.mouse_settings.pack(pady=10)
-
         #3. button
         self.update_manager_display()
         
         self.update_manager = tk.Button(self.window, text=self.update_manager_display_text, font=(font, text_size), command=self.run_update_manager, fg=text_fg, bg=self.update_manager_display_color)
         self.update_manager.pack(pady=10)
+
+        #2. button
+        self.mouse_settings = tk.Button(self.window, text=text_mouse_settings, font=(font, text_size), command=self.run_mouse_settings, fg=text_fg, bg=text_bg)
+        self.mouse_settings.pack(pady=10)
 
         #cat
         self.cat = tk.Label(self.window, text=cat, font=(font, cat_size), fg=secondary_color, bg=window_bg)
