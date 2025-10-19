@@ -233,7 +233,5 @@ class main_window:
             self.update_manager_display()
             self.update_manager.config(text=self.update_manager_display_text,bg=self.update_manager_display_color)
 
-
-
 if __name__ == "__main__":
     main_window()
