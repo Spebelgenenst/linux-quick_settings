@@ -9,11 +9,11 @@ from time import sleep
 
 #settings
 window_size = "500x350"
-always_on_top = False
+always_on_top = True
 before_quit_question = True
 help_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" #temp
 mint_version_url = "https://linuxmint.com/download.php"
-wifi_check_url = "https://google.com/"
+wifi_check_url = "https://canstein-berlin.de"
 
 #applications (for linux mint cinnamon)
 wifi_settings = ["cinnamon-settings","network"]
