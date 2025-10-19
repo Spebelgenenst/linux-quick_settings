@@ -17,7 +17,6 @@ wifi_settings = ["cinnamon-settings","network"]
 update_manager = ["mintupdate"] # can be replaced with ["sudo","apt","update"], ["sudo", "apt", "upgrade"]
 mouse_settings = ["cinnamon-settings","mouse"]
 
-
 #colors
 text_fg = "black"
 text_bg = "pink"
@@ -96,17 +95,19 @@ class main_window:
         try:
             result = subprocess.run(["nmcli", "-t", "-f", "active,ssid", "device", "wifi"], capture_output=True, text=True, check=True)
             wifi_name = [line.split(":")[-1] for line in result.stdout.strip().splitlines() if line.startswith("yes")]
-        except Exception.RequestException as e:
-            messagebox.ERROR(title="ERROR x_x", message=f"ERROR while getting wifi status\n{e}")
+        except Exception as e:
+            messagebox.showerror(title="ERROR x_x", message=f"ERROR while getting wifi status\n{e}")
 
         return wifi_name
 
     def wifi_settings_display(self):
         wifi_name = self.get_wifi_name()
         if wifi_name:
+            self.wifi_access = True
             self.wifi_settings_display_text = text_wifi_connection + wifi_name
             self.wifi_settings_display_color = text_bg
         else:
+            self.wifi_access = False
             self.wifi_settings_display_text = text_no_wifi_connection
             self.wifi_settings_display_color = secondary_color
     
@@ -126,8 +127,8 @@ class main_window:
         
             return latest_version
         
-        except requests.RequestException as e:
-            messagebox.ERROR(title="ERROR x_x", message=f"ERROR while retrieveing Latest mint version\n{e}")
+        except Exception as e:
+            messagebox.showerror(title="ERROR x_x", message=f"ERROR while retrieveing Latest mint version\n{e}")
 
     def get_local_mint_version(self):
         try:
@@ -137,18 +138,22 @@ class main_window:
                         return line.split("=")[1].strip()
                     
         except Exception as e:
-            messagebox.ERROR(title="ERROR x_x", message=f"ERROR while retrieveing local mint version\n{e}")
+            messagebox.showerror(title="ERROR x_x", message=f"ERROR while retrieveing local mint version\n{e}")
 
     def update_manager_display(self):
-        self.latest_mint_version = self.get_latest_mint_version()
-        self.local_mint_version = self.get_local_mint_version()
 
-        if self.latest_mint_version != self.local_mint_version:
-            self.update_manager_display_text = text_new_mint_version + self.latest_mint_version
-            self.update_manager_display_color = secondary_color
-        else:
-            self.update_manager_display_text = text_update_manager
-            self.update_manager_display_color = text_bg
+        if self.wifi_access:
+
+            self.latest_mint_version = self.get_latest_mint_version()
+            self.local_mint_version = self.get_local_mint_version()
+
+            if self.latest_mint_version != self.local_mint_version:
+                self.update_manager_display_text = text_new_mint_version + self.latest_mint_version
+                self.update_manager_display_color = secondary_color
+                return
+
+        self.update_manager_display_text = text_update_manager
+        self.update_manager_display_color = text_bg
 
 
     #run applications
