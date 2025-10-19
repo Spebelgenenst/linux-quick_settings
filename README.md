@@ -1,7 +1,7 @@
 # linux-quick_settings
 quick settings for linux, where you can change the most important things, especially for organizations. Optimzed for linux mint cinnamon editon!
 
-# Dependences
+# dependencies
 tkinter
 ```
 pip install tk
