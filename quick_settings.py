@@ -43,6 +43,7 @@ text_quit_message = "Are you sure you want to quit? :c"
 text_quit_title = "Quit?"
 text_new_mint_version = "New mint version available!"
 text_no_internet = "No internet connection! please connect to the internet first"
+TEXT_LOADING = "Loading..."
 
 cat= \
 "Z ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀\n\
@@ -68,22 +69,16 @@ class main_window:
         if always_on_top:
             self.window.wm_attributes("-topmost", True)
 
-        self.wifi_access_refresh()
-
         #help button
         self.help = tk.Button(self.window, text="?", font=(font, text_size), fg=text_fg, bg=text_bg, command=self.help)
         self.help.place(width=30,height=30, relx=1.0, rely=0.0, anchor="ne")
 
-        #1. button
-        self.wifi_settings_display()
-
-        self.wifi_settings = tk.Button(self.window, text=self.wifi_settings_display_text, font=(font, text_size), command=self.run_wifi_settings, fg=text_fg, bg=self.wifi_settings_display_color)
+        #1. button (temp)
+        self.wifi_settings = tk.Button(self.window, text=TEXT_LOADING, font=(font, text_size), command=self.run_wifi_settings, fg=text_fg, bg=text_bg)
         self.wifi_settings.pack(pady=10)
 
         #3. button
-        self.update_manager_display()
-        
-        self.update_manager = tk.Button(self.window, text=self.update_manager_display_text, font=(font, text_size), command=self.run_update_manager, fg=text_fg, bg=self.update_manager_display_color)
+        self.update_manager = tk.Button(self.window, text=TEXT_LOADING, font=(font, text_size), command=self.run_update_manager, fg=text_fg, bg=text_bg)
         self.update_manager.pack(pady=10)
 
         #2. button
@@ -125,7 +120,7 @@ class main_window:
         if self.wifi_access:
             if wifi_name:
                 self.wifi_access = True
-                self.wifi_settings_display_text = text_wifi_connection + wifi_name
+                self.wifi_settings_display_text = text_wifi_connection + wifi_name[0]
                 self.wifi_settings_display_color = text_bg
             else:
                 self.wifi_access = True
@@ -216,6 +211,7 @@ class main_window:
 
 
     def refresh_sleep(self):
+        self.mint_update_checked = False
         self.do_refresh = True
         self.sleep_time = 1
         while self.do_refresh:
