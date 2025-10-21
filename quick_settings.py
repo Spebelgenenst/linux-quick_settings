@@ -8,44 +8,44 @@ import threading
 from time import sleep
 
 #settings
-window_size = "500x350"
-always_on_top = False
-before_quit_question = True
-help_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" #temp
-mint_version_url = "https://linuxmint.com/download.php"
-wifi_check_url = "https://canstein-berlin.de"
+WINDOW_SIZE = "500x350"
+ALWAYS_ON_TOP = False
+BEFORE_QUIT_QUESTION = True
+URL_HELP = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" #temp
+URL_MINT_VERSION = "https://linuxmint.com/download.php"
+URL_CHECK_WIFI = "https://canstein-berlin.de"
 
-#applications (for linux mint cinnamon)
-wifi_settings = ["cinnamon-settings","network"]
-update_manager = ["mintupdate"] # can be replaced with ["sudo","apt","update"], ["sudo", "apt", "upgrade"]
-mouse_settings = ["cinnamon-settings","mouse"]
+#appliCATions (for linux mint cinnamon)
+WIFI_SETTINGS = ["cinnamon-settings","network"]
+UPDATE_MANAGER = ["mintupdate"] # can be replaced with ["sudo","apt","update"], ["sudo", "apt", "upgrade"]
+MOUSE_SETTINGS = ["cinnamon-settings","mouse"]
 
 #colors
-text_fg = "black"
-text_bg = "pink"
-secondary_color = "#fc7a84"
-window_bg = "white"
-text_size = 18
-smal_text_size = 12
-cat_size = 10
+FG_TEXT = "black"
+BG_TEXT = "pink"
+SECOUNDARY_COLOR = "#fc7a84"
+BG_WINDOW = "white"
+SIZE_TEXT = 18
+SIZE_TEXT_SMALL = 12
+SIZE_CAT = 10
 
 #text
-font = "Arial"
+FONT = "Arial"
 
-text_window_title = "Cat Menu :3"
-text_wifi_connection = "Wifi connected to: "
-text_lan_connection = "Connected to the internet :3"
-text_no_wifi_connection = "No wifi connection :c"
-text_refresh = "refresh"
-text_mouse_settings = "mouse/touchpad settings"
-text_update_manager = "update manager"
-text_quit_message = "Are you sure you want to quit? :c"
-text_quit_title = "Quit?"
-text_new_mint_version = "New mint version available!"
-text_no_internet = "No internet connection! please connect to the internet first"
+TEXT_WINDOW_TITLE = "CAT Menu :3"
+TEXT_WIFI_CONNECTION = "Wifi connected to: "
+TEXT_LAN_CONNECTION = "Connected to the internet :3"
+TEXT_NO_WIFI_CONNECTION = "No wifi connection :c"
+TEXT_REFRESH = "refresh"
+TEXT_MOUSE_SETTINGS = "mouse/touchpad settings"
+TEXT_UPDATE_MANAGER = "update manager"
+TEXT_QUIT_MESSAGE = "Are you sure you want to quit? :c"
+TEXT_QUIT_TITLE = "Quit?"
+TEXT_NEW_MINT_VERSION = "New mint version available!"
+TEXT_NO_INTERNET = "No internet connection! please connect to the internet first"
 TEXT_LOADING = "Loading..."
 
-cat= \
+CAT= \
 "Z ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀\n\
 ⠀⠀z⠀⢀⡴⣆⠀⠀⠀⠀⠀⣠⡀⠀⠀⠀⠀⠀⠀⣼⣿⡗⠀⠀⠀⠀\n\
 ⠀⠀⠀⣠⠟⠀⠘⠷⠶⠶⠶⠾⠉⢳⡄⠀⠀⠀⠀⠀⣧⣿⠀⠀⠀⠀⠀\n\
@@ -61,33 +61,33 @@ class main_window:
     def __init__(self):
 
         self.window = tk.Tk()
-        self.window.configure(bg=window_bg)
-        self.window.geometry(window_size)
-        self.window.title(text_window_title)
+        self.window.configure(bg=BG_WINDOW)
+        self.window.geometry(WINDOW_SIZE)
+        self.window.title(TEXT_WINDOW_TITLE)
 
         #always on top
-        if always_on_top:
+        if ALWAYS_ON_TOP:
             self.window.wm_attributes("-topmost", True)
 
         #help button
-        self.help = tk.Button(self.window, text="?", font=(font, text_size), fg=text_fg, bg=text_bg, command=self.help)
+        self.help = tk.Button(self.window, text="?", font=(FONT, SIZE_TEXT), fg=FG_TEXT, bg=BG_TEXT, command=self.help)
         self.help.place(width=30,height=30, relx=1.0, rely=0.0, anchor="ne")
 
         #1. button (temp)
-        self.wifi_settings = tk.Button(self.window, text=TEXT_LOADING, font=(font, text_size), command=self.run_wifi_settings, fg=text_fg, bg=text_bg)
-        self.wifi_settings.pack(pady=10)
+        self.WIFI_SETTINGS = tk.Button(self.window, text=TEXT_LOADING, font=(FONT, SIZE_TEXT), command=self.run_WIFI_SETTINGS, fg=FG_TEXT, bg=BG_TEXT)
+        self.WIFI_SETTINGS.pack(pady=10)
 
         #3. button
-        self.update_manager = tk.Button(self.window, text=TEXT_LOADING, font=(font, text_size), command=self.run_update_manager, fg=text_fg, bg=text_bg)
-        self.update_manager.pack(pady=10)
+        self.UPDATE_MANAGER = tk.Button(self.window, text=TEXT_LOADING, font=(FONT, SIZE_TEXT), command=self.run_UPDATE_MANAGER, fg=FG_TEXT, bg=BG_TEXT)
+        self.UPDATE_MANAGER.pack(pady=10)
 
         #2. button
-        self.mouse_settings = tk.Button(self.window, text=text_mouse_settings, font=(font, text_size), command=self.run_mouse_settings, fg=text_fg, bg=text_bg)
-        self.mouse_settings.pack(pady=10)
+        self.MOUSE_SETTINGS = tk.Button(self.window, text=TEXT_MOUSE_SETTINGS, font=(FONT, SIZE_TEXT), command=self.run_MOUSE_SETTINGS, fg=FG_TEXT, bg=BG_TEXT)
+        self.MOUSE_SETTINGS.pack(pady=10)
 
-        #cat
-        self.cat = tk.Label(self.window, text=cat, font=(font, cat_size), fg=secondary_color, bg=window_bg)
-        self.cat.pack(pady=10, side="bottom")
+        #CAT
+        self.CAT = tk.Label(self.window, text=CAT, font=(FONT, SIZE_CAT), fg=SECOUNDARY_COLOR, bg=BG_WINDOW)
+        self.CAT.pack(pady=10, side="bottom")
 
         #refresh tread
         self.refresh_thread = threading.Thread(target=self.refresh_sleep)
@@ -99,7 +99,7 @@ class main_window:
 
     def wifi_access_refresh(self):
         try:
-            response = requests.get(wifi_check_url, timeout=5)
+            response = requests.get(URL_CHECK_WIFI, timeout=5)
             self.wifi_access = response.status_code == 200
 
         except:
@@ -115,27 +115,27 @@ class main_window:
 
         return wifi_name
 
-    def wifi_settings_display(self):
+    def WIFI_SETTINGS_display(self):
         wifi_name = self.get_wifi_name()
         if self.wifi_access:
             if wifi_name:
                 self.wifi_access = True
-                self.wifi_settings_display_text = text_wifi_connection + wifi_name[0]
-                self.wifi_settings_display_color = text_bg
+                self.WIFI_SETTINGS_display_text = TEXT_WIFI_CONNECTION + wifi_name[0]
+                self.WIFI_SETTINGS_display_color = BG_TEXT
             else:
                 self.wifi_access = True
-                self.wifi_settings_display_text = text_lan_connection
-                self.wifi_settings_display_color = text_bg
+                self.WIFI_SETTINGS_display_text = TEXT_LAN_CONNECTION
+                self.WIFI_SETTINGS_display_color = BG_TEXT
             return
 
         self.wifi_access = False
-        self.wifi_settings_display_text = text_no_wifi_connection
-        self.wifi_settings_display_color = secondary_color
+        self.WIFI_SETTINGS_display_text = TEXT_NO_WIFI_CONNECTION
+        self.WIFI_SETTINGS_display_color = SECOUNDARY_COLOR
     
     #mint version
     def get_latest_mint_version(self):
         try:
-            response = requests.get(mint_version_url)
+            response = requests.get(URL_MINT_VERSION)
             response.raise_for_status()
 
             soup = BeautifulSoup(response.text, "html.parser")
@@ -161,7 +161,7 @@ class main_window:
         except Exception as e:
             messagebox.showerror(title="ERROR x_x", message=f"ERROR while retrieveing local mint version\n{e}")
 
-    def update_manager_display(self):
+    def UPDATE_MANAGER_display(self):
         if self.wifi_access:
             self.mint_update_checked = True
 
@@ -169,41 +169,41 @@ class main_window:
             self.local_mint_version = self.get_local_mint_version()
 
             if self.latest_mint_version != self.local_mint_version:
-                self.update_manager_display_text = text_new_mint_version + self.latest_mint_version
-                self.update_manager_display_color = secondary_color
+                self.UPDATE_MANAGER_display_text = TEXT_NEW_MINT_VERSION + self.latest_mint_version
+                self.UPDATE_MANAGER_display_color = SECOUNDARY_COLOR
                 return
 
         else:
             self.mint_update_checked = False
 
-        self.update_manager_display_text = text_update_manager
-        self.update_manager_display_color = text_bg
+        self.UPDATE_MANAGER_display_text = TEXT_UPDATE_MANAGER
+        self.UPDATE_MANAGER_display_color = BG_TEXT
         
 
 
-    #run applications
-    def run_wifi_settings(self):
-        subprocess.run(wifi_settings)
+    #run appliCATions
+    def run_WIFI_SETTINGS(self):
+        subprocess.run(WIFI_SETTINGS)
         self.sleep_time = 1
 
-    def run_update_manager(self):
-        subprocess.run(update_manager)
+    def run_UPDATE_MANAGER(self):
+        subprocess.run(UPDATE_MANAGER)
 
-    def run_mouse_settings(self):
-        subprocess.run(mouse_settings)
+    def run_MOUSE_SETTINGS(self):
+        subprocess.run(MOUSE_SETTINGS)
 
     #help
     def help(self):
         self.wifi_access_refresh()
 
         if self.wifi_access:
-            webbrowser.open(help_url)
+            webbrowser.open(URL_HELP)
         else:
-            messagebox.showinfo(title="Info", message=text_no_internet)
+            messagebox.showinfo(title="Info", message=TEXT_NO_INTERNET)
 
     def before_quit(self):
-        if before_quit_question:
-            reply = messagebox.askyesno(title=text_quit_title, message=text_quit_message)
+        if BEFORE_QUIT_QUESTION:
+            reply = messagebox.askyesno(title=TEXT_QUIT_TITLE, message=TEXT_QUIT_MESSAGE)
             if reply:
                 self.do_refresh = False
                 self.window.destroy()
@@ -222,12 +222,12 @@ class main_window:
     def refresh(self):
         self.wifi_access_refresh()
 
-        self.wifi_settings_display()
-        self.wifi_settings.config(text=self.wifi_settings_display_text, bg=self.wifi_settings_display_color)
+        self.WIFI_SETTINGS_display()
+        self.WIFI_SETTINGS.config(text=self.WIFI_SETTINGS_display_text, bg=self.WIFI_SETTINGS_display_color)
 
         if not self.mint_update_checked and self.wifi_access:
-            self.update_manager_display()
-            self.update_manager.config(text=self.update_manager_display_text,bg=self.update_manager_display_color)
+            self.UPDATE_MANAGER_display()
+            self.UPDATE_MANAGER.config(text=self.UPDATE_MANAGER_display_text,bg=self.UPDATE_MANAGER_display_color)
 
 if __name__ == "__main__":
     main_window()
